@@ -39,22 +39,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-/**
- * A mediation adapter for the Sample ad network. This class can be used as a reference to help
- * other ad networks build their own mediation adapter.
- * <p/>
- * NOTE: The audience for this sample is mediation ad networks who are trying to build an ad network
- * adapter, not an app developer trying to integrate Google Mobile Ads into their application.
- */
 public class MoPubAdapter implements MediationNativeAdapter {
 
 
     public static final double DEFAULT_MOPUB_IMAGE_SCALE = 1;
     private static final String MOPUB_AD_UNIT_KEY = "ad_unit";
-    private MoPubAdapter selfAdapter;
 
     @Override
     public void onDestroy() {
+
 
     }
 
@@ -74,16 +67,8 @@ public class MoPubAdapter implements MediationNativeAdapter {
                                 Bundle serverParameters,
                                 NativeMediationAdRequest mediationAdRequest,
                                 Bundle mediationExtras) {
-        /*
-         * In this method, you should:
-         *
-         * 1. Create a SampleNativeAdLoader
-         * 2. Set the native ad listener
-         * 3. Set native ad options (optional assets) 
-         * 4. Make an ad request.
-         */
 
-        String adunit = serverParameters.getString(MOPUB_AD_UNIT_KEY); // "28839b7b0d0b43a6827729cc50705a31"; //
+        String adunit = serverParameters.getString(MOPUB_AD_UNIT_KEY);
         final NativeAdOptions options = mediationAdRequest.getNativeAdOptions();
 
         if(mediationAdRequest.isAppInstallAdRequested() || mediationAdRequest.isContentAdRequested()){
@@ -98,11 +83,10 @@ public class MoPubAdapter implements MediationNativeAdapter {
                 if (adData instanceof StaticNativeAd) {
                     final StaticNativeAd staticNativeAd = (StaticNativeAd) adData;
 
-                    //commented for testing as the sample app required Images to be downloaded
-                   /* if(options!=null && options.shouldReturnUrlsForImageAssets()){
+                    if(options!=null && options.shouldReturnUrlsForImageAssets()){
                         final MoPubNativeAppInstallAdMapper moPubNativeAppInstallAdMapper = new MoPubNativeAppInstallAdMapper(staticNativeAd, null);
-                        listener.onAdLoadMed(MoPubAdapter.this, moPubNativeAppInstallAdMapper);
-                    }*/
+                        listener.onAdLoaded(MoPubAdapter.this, moPubNativeAppInstallAdMapper);
+                    }
 
                     HashMap <String, URL>  map  =   new HashMap <String, URL>();
                     try {

@@ -106,15 +106,8 @@ public class MainActivity extends ActionBarActivity {
               //  mCustomEventInterstitial.loadAd(new AdRequest.Builder().build());
             }
         });
-//        mCustomEventInterstitial.loadAd(new AdRequest.Builder().build());
 
-        /**
-         * Sample Adapter.
-         * 1) Create the sample adapter banner.
-         * 2) Set up the on click listener for the sample adapter interstitial button.
-         * 3) Create the sample adapter interstitial.
-         */
-        // Sample adapter banner.
+
         AdView mAdapterAdView = (AdView) findViewById(R.id.adapter_adview);
         //mAdapterAdView.loadAd(new AdRequest.Builder().build());
 
