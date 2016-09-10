@@ -1,0 +1,61 @@
+{
+  "name": "googleads-mobile-plugins",
+  "repositories": {
+    "google3": {
+      "type": "google3",
+      "project_space": "internal",
+      "build_target": "//java/com/google/android/libraries/admob/demo/mediation_adapter/opensource:mediation.tar",
+      "paths": ["//depot/google3/java/com/google/android/libraries/admob/demo/mediation_adapter"],
+      "in_components": false
+    },
+    "github": {
+      "type": "git",
+      "project_space": "public",
+      "url": "https://github.com/googleads/googleads-mobile-android-mediation.git"
+    }
+  },
+  "translators": [{
+    "from_project_space": "internal",
+    "to_project_space": "public",
+    "steps": [{
+      "name": "export_renamestep",
+      "editor": {
+        "type": "renamer",
+        "mappings": {
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/.gitignore": ".gitignore",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/gradle.properties": "gradle.properties",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/gradlew.bat": "gradlew.bat",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/build.gradle": "build.gradle",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/gradlew": "gradlew",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/settings.gradle": "settings.gradle",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/adapter": "adapter",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/app": "app",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/customevent": "customevent",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/gradle": "gradle",
+          "third_party/moe_support/DO_NOT_USE/libraries/gradle_wrapper/gradle-wrapper.jar": "gradle/wrapper/gradle-wrapper.jar",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/sdk": "sdk",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/opensource/README.md": "README.md",
+          "java/com/google/android/libraries/admob/demo/mediation_adapter/opensource/LICENSE": "LICENSE"
+        }
+      }
+    },{
+      "name": "export_scrubstep",
+      "editor": {
+        "type": "scrubber",
+        "scrubber_config": {
+          "scrub_unknown_users": true
+        }
+      }
+    }]
+  }],
+  "migrations": [{
+    "name": "moe_publicize",
+    "from_repository": "google3",
+    "to_repository": "github",
+    "separate_revisions": true,
+    "metadata_scrubber_config": {
+      "usernames_to_scrub": [],
+      "scrub_confidential_words": true
+    }
+  }]
+}

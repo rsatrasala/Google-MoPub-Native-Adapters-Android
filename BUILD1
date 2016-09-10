@@ -1,0 +1,36 @@
+# Copyright 2015 Google Inc. All rights reserved.
+# Author: eleichtenschl@google.com (Eric Leichtenschlag)
+#
+# Description:
+#    Open-sourcing build rules for the Android Mediation example project.
+
+package(default_visibility = ["//visibility:public"])
+
+# Filegroup containing files to open source.
+filegroup(
+    name = "mediation_files",
+    srcs = [
+        ".gitignore",
+        "build.gradle",
+        "gradle.properties",
+        "gradlew.bat",
+        "gradlew",
+        "settings.gradle",
+    ] + glob(
+        [
+            "adapter/**",
+            "app/**",
+            "customevent/**",
+            "gradle/**",
+            "sdk/**",
+        ],
+        exclude = [
+            # Android Studio Excludes.
+            "**/build/**",
+            "**/.gradle/**",
+            "**/.idea/**",
+            "**/*.iml",
+            "**/local.properties",
+        ],
+    ),
+)
