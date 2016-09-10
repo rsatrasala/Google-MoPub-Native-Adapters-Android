@@ -21,10 +21,6 @@ import android.net.Uri;
 
 import com.google.android.gms.ads.formats.NativeAd;
 
-/**
- * A simple class that fits the the {@link NativeAd.Image} abstract class and can be filled with
- * assets returned by the Sample SDK.
- */
 public class MoPubNativeMappedImage extends NativeAd.Image {
 
     private Drawable mDrawable;
