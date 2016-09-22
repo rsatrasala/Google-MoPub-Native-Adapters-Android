@@ -55,8 +55,13 @@ public class MoPubAdapter implements MediationNativeAdapter {
         String adunit = serverParameters.getString(MOPUB_AD_UNIT_KEY);
         final NativeAdOptions options = mediationAdRequest.getNativeAdOptions();
 
-        if(mediationAdRequest.isAppInstallAdRequested() || mediationAdRequest.isContentAdRequested()){
+        // Check for type of is updated. This is better as the fill rate will increase. -rupa
+        if(!mediationAdRequest.isAppInstallAdRequested() || mediationAdRequest
+                .isContentAdRequested()){
+            Log.d("MoPub", "MoPub will be able to serve only content ads in the mediation " +
+                    "currently.");
             listener.onAdFailedToLoad(MoPubAdapter.this, AdRequest.ERROR_CODE_INVALID_REQUEST);
+            return;
         }
 
         MoPubNative.MoPubNativeNetworkListener moPubNativeNetworkListener = new MoPubNative.MoPubNativeNetworkListener() {
@@ -78,7 +83,10 @@ public class MoPubAdapter implements MediationNativeAdapter {
                         map.put(DownloadDrawablesAsync.KEY_IMAGE, new URL(staticNativeAd.getMainImageUrl()));
 
                     } catch (MalformedURLException e) {
+                        //return added with fail callbacks - rupa
                         Log.d("MoPub", "Invalid ad response received from MoPub. Image URLs are invalid");
+                        listener.onAdFailedToLoad(MoPubAdapter.this, AdRequest.ERROR_CODE_INTERNAL_ERROR);
+                        return;
                     }
 
                     new DownloadDrawablesAsync(new DrawableDownloadListener() {
@@ -124,6 +132,7 @@ public class MoPubAdapter implements MediationNativeAdapter {
         if(adunit==null) {
             Log.d("MoPub", "Adunit id is invalid. So failing the request.");
             listener.onAdFailedToLoad(MoPubAdapter.this, AdRequest.ERROR_CODE_INVALID_REQUEST);
+            return;
         }
 
         MoPubNative moPubNative = new MoPubNative(context, adunit, moPubNativeNetworkListener);

@@ -31,10 +31,28 @@ public class MoPubNativeAppInstallAdMapper extends NativeAppInstallAdMapper {
             imagesList.add(new MoPubNativeMappedImage(drawableMap.get(DownloadDrawablesAsync.KEY_IMAGE),
                     mMopubNativeAdData.getMainImageUrl(), MoPubAdapter.DEFAULT_MOPUB_IMAGE_SCALE));
             setImages(imagesList);
+        }else {
+            // If the publisher request for URLs only, the Images list and Icon image assets should
+            // still be mapped but with image URLs only. - sbagadi@
+            //That would be drawable with only URI right as below? Can you confirm? @rupa
+            setIcon(new MoPubNativeMappedImage(null,
+                    mMopubNativeAdData.getIconImageUrl(), MoPubAdapter.DEFAULT_MOPUB_IMAGE_SCALE));
+
+            List<NativeAd.Image> imagesList = new ArrayList<NativeAd.Image>();
+            imagesList.add(new MoPubNativeMappedImage(null,
+                    mMopubNativeAdData.getMainImageUrl(), MoPubAdapter.DEFAULT_MOPUB_IMAGE_SCALE));
+            setImages(imagesList);
         }
 
         setOverrideClickHandling(false);
         setOverrideImpressionRecording(false);
+    }
+
+    //untrackview is added - rupa
+    @Override
+    public void untrackView(View view) {
+        super.untrackView(view);
+        mMopubNativeAdData.clear(view);
     }
 
     public void trackView(View view) {
