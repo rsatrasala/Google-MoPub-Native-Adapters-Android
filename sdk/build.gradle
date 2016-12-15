@@ -24,5 +24,4 @@ dependencies {
     compile('com.mopub:mopub-sdk:4.8.0@aar') {
         transitive = true
     }
-    compile 'com.facebook.android:audience-network-sdk:4.+'
 }

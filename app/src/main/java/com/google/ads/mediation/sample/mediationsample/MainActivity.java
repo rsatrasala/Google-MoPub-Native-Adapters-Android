@@ -64,8 +64,8 @@ public class MainActivity extends ActionBarActivity {
          * 3) Create the sample custom event interstitial.
          */
         // Sample custom event banner.
-        //AdView mCustomEventAdView = (AdView) findViewById(R.id.customevent_adview);
-//        mCustomEventAdView.loadAd(new AdRequest.Builder().build());
+        AdView mCustomEventAdView = (AdView) findViewById(R.id.customevent_adview);
+        mCustomEventAdView.loadAd(new AdRequest.Builder().build());
 
         // Sample custom event interstitial button.
         mCustomEventButton = (Button) findViewById(R.id.customevent_button);
@@ -103,13 +103,13 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onAdClosed() {
-              //  mCustomEventInterstitial.loadAd(new AdRequest.Builder().build());
+                mCustomEventInterstitial.loadAd(new AdRequest.Builder().build());
             }
         });
 
 
         AdView mAdapterAdView = (AdView) findViewById(R.id.adapter_adview);
-        //mAdapterAdView.loadAd(new AdRequest.Builder().build());
+        mAdapterAdView.loadAd(new AdRequest.Builder().build());
 
         // Sample adapter interstitial button.
         mAdapterButton = (Button) findViewById(R.id.adapter_button);
